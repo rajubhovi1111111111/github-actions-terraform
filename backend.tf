@@ -5,8 +5,6 @@ terraform {
     key            = "terraform.tfstate/terraform.tfstate"
     encrypt = true
 
-    
-    dynamodb_table = "terraform-state-locking"
   
   }
   required_version = ">=0.13.0"
