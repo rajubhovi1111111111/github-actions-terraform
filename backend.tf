@@ -4,6 +4,8 @@ terraform {
     region         = "us-east-1"
     key            = "s3-github-actions/terraform.tfstate"
     encrypt = true
+        
+    dynamodb_table = "terraform-state-locking"
   }
   required_version = ">=0.13.0"
   required_providers {
