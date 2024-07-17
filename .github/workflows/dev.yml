@@ -3,10 +3,10 @@ name: Terraform CI/CD
 on:
   push:
     branches:
-      - dev
+      - dev1
   pull_request:
     branches:
-      - dev
+      - dev1
 
 jobs:
   terraform:
@@ -59,19 +59,7 @@ jobs:
         tflint --init
         tflint
 
-    #- name: 'tfsec'
-     # run: tfsec .
 
-    - name: 'Terraform Plan'
-      id: plan
-      run: |
-        terraform plan -out=tfplan
-        aws s3 cp tfplan s3://terraformplan223/tfplan
 
-    - name: 'Download Terraform Plan from S3'
-      if: github.ref == 'refs/heads/main'
-      run: aws s3 cp s3://terraformplan223/tfplan tfplan
-
-    - name: 'Terraform Apply'
-      if: github.ref == 'refs/heads/dev'
-      run: terraform apply -auto-approve tfplan
+    - name: 'Terraform destroy'
+      run: terraform destroy 
